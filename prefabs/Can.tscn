@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/can.gltf" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Can.cs" type="Script" id=2]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.406461
+height = 0.910519
+
+[node name="Can" instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="." index="1"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Area" to="." method="OnCanBodyEntered"]
