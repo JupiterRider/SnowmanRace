@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/can.gltf" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Can.cs" type="Script" id=2]
@@ -6,6 +6,22 @@
 [sub_resource type="CylinderShape" id=1]
 radius = 0.406461
 height = 0.910519
+
+[sub_resource type="Animation" id=2]
+resource_name = "Taken"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cylinder:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 4, 0 ) ]
+}
 
 [node name="Can" instance=ExtResource( 1 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -15,4 +31,9 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+anims/Taken = SubResource( 2 )
+
 [connection signal="body_entered" from="Area" to="." method="OnCanBodyEntered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]

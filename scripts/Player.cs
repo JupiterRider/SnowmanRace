@@ -38,7 +38,7 @@ public class Player : KinematicBody
 
         if (Translation.y < -10)
         {
-            Translation = new Vector3(0f, 0.75f, 0f);
+            GetTree().ReloadCurrentScene();
         }
 
         var strTime = ((long)time).ToString();
@@ -132,7 +132,7 @@ public class Player : KinematicBody
             }
         }
 
-        if (Input.IsActionJustPressed("Escape"))
+        if (Input.IsActionJustPressed("ESC"))
         {
             GetTree().Quit();
         }
