@@ -23,6 +23,7 @@ public class Player : KinematicBody
 
     public override void _Ready()
     {
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
         collisionShape = GetNode<CollisionShape>("CollisionShape");
         animationPlayer = GetNode<AnimationPlayer>("Snowman2/AnimationPlayer");
         camBase = GetNode<Spatial>("CamBase");
@@ -41,7 +42,7 @@ public class Player : KinematicBody
             GetTree().ReloadCurrentScene();
         }
 
-        var strTime = ((long)time).ToString();
+        var strTime = (time).ToString("F3");
 
         if (cans < 6)
         {
